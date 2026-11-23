@@ -1,0 +1,564 @@
+/* =========================================================
+   KisanMandi Auth: Login, Register, Forgot / Update password, Verify email
+   pages.css ke baad load hota hai (auth-card, farm-form, input-icon wahan hain)
+   Yahan: AJAX errors, live check status, Select2, Google address, OTP, modals, toastr
+   ========================================================= */
+
+/* ---------- Field error (JS se text aata hai) ---------- */
+.field-error {
+    margin-top: .3rem;
+    color: #c2421f;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.field-error:empty {
+    display: none;
+}
+
+.farm-form .form-control.is-valid {
+    border-color: var(--farm-green);
+    background-image: none;
+}
+
+.farm-form .form-check-input.is-invalid {
+    border-color: var(--farm-red);
+}
+
+/* Live check: sponsor / email / mobile */
+.field-status {
+    display: none;
+    margin-top: .3rem;
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.field-status.checking {
+    color: var(--farm-ink-soft);
+}
+
+.field-status.available {
+    color: var(--farm-green);
+}
+
+.field-status.taken {
+    color: #c2421f;
+}
+
+.req {
+    color: var(--farm-red);
+}
+
+.form-label small {
+    font-weight: 500;
+    color: var(--farm-ink-soft);
+}
+
+/* Login button: text + spinner */
+.btn-farm .spinner-border {
+    vertical-align: -.15em;
+}
+
+.btn-farm:disabled {
+    opacity: .75;
+}
+
+/* ---------- Register: Farmer / Non Farmer ---------- */
+.role-choose.is-invalid .role-option label {
+    border-color: var(--farm-red);
+}
+
+.type-hint {
+    margin: .75rem 0 0;
+    padding: .7rem .9rem;
+    border-radius: .8rem;
+    background: var(--farm-mist);
+    color: var(--farm-green-dark);
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.type-hint i {
+    margin-right: .35rem;
+}
+
+/* Type chunne ke baad form khulta hai (JS slideDown) */
+#formBody {
+    display: none;
+}
+
+.reg-section-title {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: .5rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--farm-line);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--farm-green-dark);
+}
+
+.reg-section-title i {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: .6rem;
+    background: #e2f2dc;
+    color: var(--farm-green);
+    font-size: .9rem;
+}
+
+/* Address: Google / Manual tabs */
+.addr-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 26rem;
+    gap: .25rem;
+    padding: .25rem;
+    border-radius: 50rem;
+    background: var(--farm-mist);
+    border: 1px solid var(--farm-line);
+}
+
+.addr-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    padding: .45rem .6rem;
+    white-space: nowrap;
+    border: 0;
+    border-radius: 50rem;
+    background: transparent;
+    color: var(--farm-ink-soft);
+    font-weight: 700;
+    font-size: .9rem;
+    transition: background .2s, color .2s;
+}
+
+.addr-tab:hover {
+    color: var(--farm-green-dark);
+}
+
+.addr-tab.active {
+    background: var(--farm-green);
+    color: var(--farm-white);
+    box-shadow: 0 4px 10px rgba(29, 122, 58, .25);
+}
+
+.addr-tab:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* Google search box (PlaceAutocompleteElement) */
+.place-search-box {
+    padding: .35rem;
+    border: 2px solid var(--farm-line);
+    border-radius: .8rem;
+    background: var(--farm-white);
+}
+
+.place-search-box:focus-within {
+    border-color: var(--farm-green);
+    box-shadow: 0 0 0 4px rgba(29, 122, 58, .12);
+}
+
+#placeSearch:empty::before {
+    content: "Loading address search...";
+    display: block;
+    padding: .35rem .5rem;
+    color: var(--farm-ink-soft);
+    font-size: .9rem;
+}
+
+#placeSearch gmp-place-autocomplete {
+    width: 100%;
+    color-scheme: light;
+}
+
+.place-summary {
+    display: none;
+    align-items: flex-start;
+    gap: .55rem;
+    margin-top: .6rem;
+    padding: .65rem .85rem;
+    border-radius: .8rem;
+    background: #e5f4e0;
+    border: 1px solid #bfe0b2;
+    color: var(--farm-green-dark);
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.place-summary i {
+    margin-top: .2rem;
+}
+
+.place-summary span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- Select2 (State / City) farm look ---------- */
+.farm-form .select2-container {
+    width: 100% !important;
+}
+
+.farm-form .select2-container--default .select2-selection--single {
+    height: auto;
+    min-height: 2.9rem;
+    padding: .45rem .85rem;
+    border: 2px solid var(--farm-line);
+    border-radius: .8rem;
+    background: var(--farm-white);
+}
+
+.farm-form .select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding: 0 1.5rem 0 0;
+    line-height: 1.6;
+    color: var(--farm-ink);
+}
+
+.farm-form .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #8a978d;
+}
+
+.farm-form .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 50%;
+    right: .6rem;
+    height: auto;
+    transform: translateY(-50%);
+}
+
+.farm-form .select2-container--default.select2-container--open .select2-selection--single,
+.farm-form .select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: var(--farm-green);
+    box-shadow: 0 0 0 4px rgba(29, 122, 58, .12);
+}
+
+.farm-form .select2-container--default.select2-container--disabled .select2-selection--single {
+    background: #f4f7f3;
+}
+
+.farm-form select.is-invalid + .select2-container .select2-selection--single {
+    border-color: var(--farm-red);
+}
+
+.select2-dropdown {
+    border: 2px solid var(--farm-green);
+    border-radius: .8rem;
+    overflow: hidden;
+    font-family: var(--font-body);
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 2px solid var(--farm-line);
+    border-radius: .6rem;
+    padding: .35rem .6rem;
+    outline: 0;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background: var(--farm-green);
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background: var(--farm-mist);
+    color: var(--farm-green-dark);
+}
+
+/* ---------- OTP boxes ---------- */
+.otp-boxes {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.otp-box {
+    width: 3rem;
+    height: 3.4rem;
+    min-width: 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--farm-green-dark);
+    border: 2px solid var(--farm-line);
+    border-radius: .8rem;
+    background: var(--farm-white);
+    outline: 0;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.otp-box:focus {
+    border-color: var(--farm-green);
+    box-shadow: 0 0 0 4px rgba(29, 122, 58, .14);
+}
+
+.otp-box.is-invalid {
+    border-color: var(--farm-red);
+}
+
+@media (max-width: 400px) {
+    .otp-boxes {
+        gap: .35rem;
+    }
+
+    .otp-box {
+        width: 2.5rem;
+        height: 3rem;
+        font-size: 1.25rem;
+    }
+}
+
+.otp-note {
+    color: var(--farm-ink-soft);
+    font-size: .92rem;
+}
+
+.otp-note b {
+    color: var(--farm-ink);
+}
+
+.link-btn {
+    padding: 0;
+    border: 0;
+    background: none;
+    font-weight: 700;
+    color: var(--farm-green);
+}
+
+.link-btn:hover:not(:disabled) {
+    text-decoration: underline;
+}
+
+.link-btn:disabled {
+    color: #9aa79d;
+    cursor: not-allowed;
+}
+
+.pass-rules {
+    margin: .4rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: .82rem;
+    color: var(--farm-ink-soft);
+}
+
+.pass-rules li {
+    display: flex;
+    gap: .4rem;
+}
+
+.pass-rules i {
+    margin-top: .25rem;
+    color: var(--farm-lime);
+    font-size: .7rem;
+}
+
+/* Upar ka chhota gol icon (forgot / update / verify) */
+.auth-badge {
+    display: grid;
+    place-items: center;
+    width: 3.4rem;
+    height: 3.4rem;
+    margin-bottom: .8rem;
+    border-radius: 1rem;
+    background: #e2f2dc;
+    color: var(--farm-green);
+    font-size: 1.4rem;
+}
+
+.auth-back {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+/* ---------- Modals (OTP, Registration success) ---------- */
+.farm-modal .modal-content {
+    border: 0;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    font-family: var(--font-body);
+    box-shadow: 0 24px 50px rgba(19, 92, 42, .25);
+}
+
+.farm-modal .modal-header {
+    border: 0;
+    padding: 1.25rem 1.5rem .25rem;
+}
+
+.farm-modal .modal-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--farm-green-dark);
+}
+
+.farm-modal .modal-body {
+    padding: 1rem 1.5rem 1.5rem;
+}
+
+.farm-modal .modal-footer {
+    border: 0;
+    padding: 0 1.5rem 1.5rem;
+    gap: .5rem;
+}
+
+.farm-modal .modal-footer > * {
+    margin: 0;
+}
+
+.success-icon {
+    display: grid;
+    place-items: center;
+    width: 4.2rem;
+    height: 4.2rem;
+    margin: 0 auto .8rem;
+    border-radius: 50%;
+    background: var(--farm-green);
+    color: var(--farm-white);
+    font-size: 1.8rem;
+    box-shadow: 0 0 0 8px #e2f2dc;
+}
+
+.success-title {
+    margin-bottom: .2rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.45rem;
+    color: var(--farm-green-dark);
+}
+
+.success-sub {
+    color: var(--farm-ink-soft);
+}
+
+.cred-list {
+    display: grid;
+    gap: .5rem;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.cred-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: .1rem .75rem;
+    padding: .6rem .8rem;
+    border-radius: .9rem;
+    background: var(--farm-mist);
+    border: 1px solid var(--farm-line);
+}
+
+.cred-label {
+    grid-column: 1;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--farm-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+.cred-value {
+    grid-column: 1;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--farm-ink);
+    overflow-wrap: anywhere;
+}
+
+.cred-copy {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 0;
+    border-radius: .7rem;
+    background: var(--farm-white);
+    color: var(--farm-green);
+    box-shadow: 0 2px 6px rgba(19, 92, 42, .12);
+    transition: background .2s, color .2s;
+}
+
+.cred-copy:hover {
+    background: var(--farm-green);
+    color: var(--farm-white);
+}
+
+.success-note {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1rem;
+    padding: .7rem .85rem;
+    border-radius: .8rem;
+    background: #fff3d1;
+    color: #7a5200;
+    font-size: .88rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.success-note i {
+    margin-top: .2rem;
+}
+
+/* ---------- Toastr farm colors ---------- */
+#toast-container > div {
+    opacity: .97;
+    border-radius: .9rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+}
+
+#toast-container > div:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .22);
+}
+
+#toast-container > .toast-success {
+    background-color: var(--farm-green);
+}
+
+#toast-container > .toast-error {
+    background-color: #c2421f;
+}
+
+#toast-container > .toast-warning {
+    background-color: #d99211;
+}
+
+#toast-container > .toast-info {
+    background-color: var(--farm-green-dark);
+}
+
+.toast-progress {
+    background-color: var(--farm-yellow);
+    opacity: .8;
+}
+
+#toast-container.toast-top-right {
+    top: 1rem;
+    right: 1rem;
+}
+
+@media (max-width: 400px) {
+    .addr-tab {
+        font-size: .8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #toast-container > div {
+        width: calc(100vw - 2rem);
+    }
+}

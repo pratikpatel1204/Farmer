@@ -1,0 +1,941 @@
+/* =========================================================
+   KisanMandi Header (Bootstrap 5)
+   Load order: bootstrap.min.css -> fontawesome -> fonts.css -> header.css
+   Breakpoints (Bootstrap):
+     Mobile  < 768px   : hamburger + logo + login icon, search niche full width
+     Tablet  768-991px : ek line me logo, search, Login/Register; menu drawer me
+     Desktop >= 992px  : poora green menu bar
+   ========================================================= */
+
+:root {
+    --farm-green: #1d7a3a;
+    --farm-green-dark: #135c2a;
+    --farm-lime: #8cc63f;
+    --farm-yellow: #f5b324;
+    --farm-brown: #7b4a23;
+    --farm-red: #e2552d;
+    --farm-white: #ffffff;
+    --farm-mist: #f1f8ee;
+    --farm-ink: #1d2a1f;
+    --farm-ink-soft: #55665a;
+    --farm-line: #d9e8d3;
+    --font-display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+    --font-body: "Mukta", "Segoe UI", system-ui, sans-serif;
+}
+
+/* ---------- Header wrapper ---------- */
+.site-header {
+    z-index: 1030;
+    background: var(--farm-white);
+    box-shadow: 0 6px 18px rgba(19, 92, 42, .18);
+    font-family: var(--font-body);
+}
+
+.site-header a {
+    text-decoration: none;
+}
+
+.field-stripe {
+    height: 6px;
+    background: linear-gradient(90deg,
+            var(--farm-green) 0 25%, var(--farm-yellow) 25% 50%,
+            var(--farm-red) 50% 75%, var(--farm-brown) 75% 100%);
+}
+
+/* ---------- Logo ---------- */
+.brand-logo {
+    flex-shrink: 0;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.brand-name {
+    display: block;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.45rem;
+    line-height: 1;
+    letter-spacing: -.01em;
+}
+
+.brand-name-first {
+    color: var(--farm-green);
+}
+
+.brand-name-second {
+    color: var(--farm-red);
+}
+
+.brand-tagline {
+    margin-top: 3px;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--farm-brown);
+}
+
+/* ---------- Search ---------- */
+.header-search {
+    order: 10;
+    /* mobile: niche nayi line me */
+    flex: 1 1 100%;
+    min-width: 0;
+}
+
+.header-search .input-group {
+    flex-wrap: nowrap;
+    padding: 2px;
+    background: var(--farm-mist);
+    border: 2px solid var(--farm-line);
+    border-radius: 50rem;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.header-search .input-group:focus-within {
+    border-color: var(--farm-green);
+    box-shadow: 0 0 0 4px rgba(29, 122, 58, .12);
+}
+
+.header-search .form-control,
+.header-search .form-select {
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+    font-family: var(--font-body);
+    color: var(--farm-ink);
+}
+
+.header-search .form-control {
+    padding-left: 14px;
+    font-weight: 500;
+}
+
+.header-search .form-control::placeholder {
+    color: var(--farm-ink-soft);
+}
+
+.header-search .input-group>.search-category {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 130px;
+    padding-left: 16px;
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--farm-green-dark) !important;
+    border-right: 2px solid var(--farm-line) !important;
+    border-radius: 50rem 0 0 50rem;
+    cursor: pointer;
+}
+
+.search-btn {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    flex-shrink: 0;
+    border-radius: 50% !important;
+    background: var(--farm-green);
+    color: var(--farm-white);
+    border: 0;
+}
+
+.search-btn:hover,
+.search-btn:focus-visible {
+    background: var(--farm-green-dark);
+    color: var(--farm-white);
+}
+
+/* ---------- Buttons ---------- */
+.btn-login,
+.btn-register {
+    --bs-btn-padding-x: 1.1rem;
+    --bs-btn-font-weight: 700;
+    --bs-btn-border-width: 2px;
+    --bs-btn-border-radius: 50rem;
+    white-space: nowrap;
+}
+
+.btn-login {
+    --bs-btn-color: var(--farm-green);
+    --bs-btn-bg: var(--farm-white);
+    --bs-btn-border-color: var(--farm-green);
+    --bs-btn-hover-color: var(--farm-white);
+    --bs-btn-hover-bg: var(--farm-green);
+    --bs-btn-hover-border-color: var(--farm-green);
+    --bs-btn-active-color: var(--farm-white);
+    --bs-btn-active-bg: var(--farm-green-dark);
+    --bs-btn-active-border-color: var(--farm-green-dark);
+}
+
+.btn-register {
+    --bs-btn-color: var(--farm-ink);
+    --bs-btn-bg: var(--farm-yellow);
+    --bs-btn-border-color: var(--farm-yellow);
+    --bs-btn-hover-color: var(--farm-white);
+    --bs-btn-hover-bg: var(--farm-red);
+    --bs-btn-hover-border-color: var(--farm-red);
+    --bs-btn-active-color: var(--farm-white);
+    --bs-btn-active-bg: var(--farm-red);
+    --bs-btn-active-border-color: var(--farm-red);
+}
+
+.header-icon-btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    font-size: 1.15rem;
+    border-radius: 12px;
+    border: 0;
+    background: var(--farm-mist);
+    color: var(--farm-green-dark);
+}
+
+.header-icon-btn:hover {
+    background: var(--farm-line);
+    color: var(--farm-green-dark);
+}
+
+/* ---------- Menu: common ---------- */
+.main-nav .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.nav-icon {
+    width: 18px;
+    text-align: center;
+}
+
+.nav-cta-icon {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: .85rem;
+}
+
+.nav-cta-want .nav-cta-icon {
+    background: var(--farm-red);
+    color: var(--farm-white);
+}
+
+.nav-cta-have .nav-cta-icon {
+    background: var(--farm-yellow);
+    color: var(--farm-ink);
+}
+
+.category-menu {
+    --bs-dropdown-link-active-bg: var(--farm-green);
+    --bs-dropdown-link-hover-bg: var(--farm-mist);
+    --bs-dropdown-link-hover-color: var(--farm-green-dark);
+    padding: 8px;
+    border: 0;
+    border-radius: 14px;
+}
+
+.category-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.category-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-green {
+    background: var(--farm-green);
+}
+
+.dot-dark-green {
+    background: var(--farm-green-dark);
+}
+
+.dot-red {
+    background: var(--farm-red);
+}
+
+.dot-yellow {
+    background: var(--farm-yellow);
+}
+
+.dot-lime {
+    background: var(--farm-lime);
+}
+
+.dot-brown {
+    background: var(--farm-brown);
+}
+
+/* ---------- Mobile + Tablet drawer (< 992px) ---------- */
+@media (max-width: 991.98px) {
+    .main-nav .offcanvas {
+        width: min(320px, 86vw);
+    }
+
+    .main-nav-drawer-head {
+        background: var(--farm-green);
+        border-bottom: 5px solid var(--farm-yellow);
+    }
+
+    .main-nav-drawer-head .brand-name-first {
+        color: var(--farm-white);
+    }
+
+    .main-nav-drawer-head .brand-name-second {
+        color: var(--farm-yellow);
+    }
+
+    .main-nav .offcanvas-body {
+        padding: 10px;
+    }
+
+    .main-nav .nav-link {
+        padding: 11px 14px;
+        border-radius: 12px;
+        font-size: 1.05rem;
+        color: var(--farm-ink);
+    }
+
+    .main-nav .nav-link .nav-icon {
+        color: var(--farm-green);
+    }
+
+    .main-nav .nav-link:hover,
+    .main-nav .nav-link.active,
+    .main-nav .nav-link.show {
+        background: var(--farm-mist);
+        color: var(--farm-green-dark);
+    }
+
+    .main-nav .nav-cta {
+        padding-left: 8px;
+    }
+
+    .main-nav .dropdown-toggle::after {
+        margin-left: auto;
+    }
+
+    .category-menu {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        margin: 4px 0 6px;
+        background: var(--farm-mist);
+    }
+
+    .category-menu.show {
+        display: grid;
+    }
+
+    .drawer-account .btn {
+        justify-content: center;
+    }
+}
+
+/* ---------- Tablet + Desktop (>= 768px) ---------- */
+@media (min-width: 768px) {
+    .header-search {
+        order: 0;
+        flex: 1 1 auto;
+    }
+}
+
+/* ---------- Desktop (>= 992px) ---------- */
+@media (min-width: 992px) {
+    .brand-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .brand-name {
+        font-size: 1.7rem;
+    }
+
+    .top-bar .container-xl {
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+    }
+
+    .main-nav {
+        background: var(--farm-green);
+    }
+
+    .main-nav .navbar-nav .nav-link {
+        position: relative;
+        padding: 13px 12px;
+        color: var(--farm-white);
+    }
+
+    /* yellow underline on hover / active */
+    .main-nav .navbar-nav .nav-link:not(.nav-cta)::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 6px;
+        height: 3px;
+        border-radius: 3px;
+        background: var(--farm-yellow);
+        transform: scaleX(0);
+        transition: transform .2s;
+    }
+
+    .main-nav .navbar-nav .nav-link:hover::before,
+    .main-nav .navbar-nav .nav-link.active::before,
+    .main-nav .navbar-nav .nav-link.show::before {
+        transform: scaleX(1);
+    }
+
+    .main-nav .navbar-nav .nav-link.active {
+        color: var(--farm-yellow);
+    }
+
+    .main-nav .navbar-nav .nav-cta {
+        margin: 0 4px;
+        padding: 5px 14px 5px 5px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, .1);
+        border: 1.5px solid rgba(255, 255, 255, .3);
+        transition: background .2s, border-color .2s;
+    }
+
+    .main-nav .navbar-nav .nav-cta:hover,
+    .main-nav .navbar-nav .nav-cta.active {
+        background: rgba(255, 255, 255, .2);
+        border-color: var(--farm-yellow);
+        color: var(--farm-white);
+    }
+
+    .category-menu {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        min-width: 340px;
+        margin-top: 0 !important;
+        border-top: 4px solid var(--farm-yellow);
+        box-shadow: 0 14px 30px rgba(19, 92, 42, .22);
+    }
+
+    .category-menu .dropdown-item {
+        white-space: nowrap;
+    }
+
+    /* Desktop par hover se bhi khule */
+    .category-dropdown:hover>.category-menu,
+    .category-menu.show {
+        display: grid;
+    }
+}
+
+/* Chhota tablet: icons hata kar menu compact */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .main-nav .navbar-nav .nav-link {
+        padding-left: 9px;
+        padding-right: 9px;
+        font-size: .95rem;
+    }
+
+    .main-nav .navbar-nav .nav-link:not(.nav-cta)::before {
+        left: 9px;
+        right: 9px;
+    }
+
+    .main-nav .nav-icon {
+        display: none;
+    }
+
+    .nav-cta-icon {
+        width: 26px;
+        height: 26px;
+        font-size: .8rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .category-menu {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .site-header *,
+    .site-header *::before {
+        transition: none !important;
+    }
+}
+
+/* =========================================================
+   Footer (layout/footer.blade.php)
+   ========================================================= */
+.site-footer {
+    font-family: var(--font-body);
+    background: #10331c;
+    color: rgba(255, 255, 255, .78);
+}
+
+.site-footer a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, .78);
+}
+
+.site-footer a:hover {
+    text-decoration: none;
+    color: var(--farm-yellow);
+}
+
+.footer-top {
+    padding: 2.5rem 0 1.5rem;
+}
+
+.footer-brand {
+    font-size: 1.7rem;
+}
+
+.site-footer .brand-name-first {
+    color: var(--farm-lime);
+}
+
+.site-footer .brand-name-second {
+    color: var(--farm-yellow);
+}
+
+.footer-about {
+    margin: .6rem 0 0;
+    max-width: 22rem;
+}
+
+.footer-title {
+    margin: 0 0 .75rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--farm-white);
+}
+
+.footer-links,
+.footer-contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: .45rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, .78);
+    transition: color .2s;
+}
+
+.footer-links a:hover {
+    color: var(--farm-yellow);
+}
+
+.footer-contact li {
+    display: flex;
+    gap: .6rem;
+    margin-bottom: .55rem;
+    overflow-wrap: anywhere;
+}
+
+.footer-contact i {
+    margin-top: .25rem;
+    color: var(--farm-lime);
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: 1rem 0 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+    font-size: .9rem;
+}
+
+.footer-bottom i {
+    color: var(--farm-lime);
+}
+
+/* =========================================================
+   KisanMandi: Header language dropdown (Google Translate)
+   header.css ke END me paste karein (ya alag file bana kar header.css ke baad load karein).
+   Markup: front/layout/header.blade.php -> .lang-switch
+   ========================================================= */
+
+/* Mobile par: menu | logo | bhasha | account (search neeche wali line me) */
+.lang-switch {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 44px;
+    padding: 0 .85rem 0 .7rem;
+    border: 2px solid var(--farm-line);
+    border-radius: 50rem;
+    background: var(--farm-mist);
+    color: var(--farm-green-dark);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: .92rem;
+    line-height: 1;
+    white-space: nowrap;
+    transition: border-color .2s, background .2s, box-shadow .2s;
+}
+
+.lang-btn:hover,
+.lang-btn:focus-visible,
+.lang-switch .lang-btn.show {
+    border-color: var(--farm-green);
+    background: var(--farm-white);
+    color: var(--farm-green-dark);
+    box-shadow: 0 0 0 4px rgba(29, 122, 58, .12);
+}
+
+.lang-btn-icon {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--farm-green);
+    color: var(--farm-white);
+    font-size: .85rem;
+}
+
+.lang-btn-short {
+    display: none;
+}
+
+.lang-btn-caret {
+    font-size: .65rem;
+    opacity: .7;
+    transition: transform .2s;
+}
+
+.lang-switch .lang-btn.show .lang-btn-caret {
+    transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.lang-menu {
+    --bs-dropdown-min-width: 15rem;
+    --bs-dropdown-padding-y: .4rem;
+    --bs-dropdown-border-color: var(--farm-line);
+    --bs-dropdown-border-radius: 1rem;
+    --bs-dropdown-link-hover-bg: var(--farm-mist);
+    --bs-dropdown-link-active-bg: var(--farm-mist);
+    --bs-dropdown-link-active-color: var(--farm-green-dark);
+    margin-top: .5rem !important;
+    padding: .4rem;
+    border-width: 1px;
+    box-shadow: 0 16px 36px rgba(19, 92, 42, .18);
+    font-family: var(--font-body);
+    z-index: 1060;
+}
+
+.lang-menu-head {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .45rem .7rem .55rem;
+    margin-bottom: .25rem;
+    border-bottom: 1px dashed var(--farm-line);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--farm-ink-soft);
+}
+
+.lang-menu-head i {
+    color: var(--farm-green);
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .55rem .7rem;
+    border-radius: .75rem;
+    color: var(--farm-ink);
+    transition: background .15s;
+}
+
+.lang-option+.lang-option,
+.lang-menu li+li .lang-option {
+    margin-top: 2px;
+}
+
+.lang-badge {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: .7rem;
+    background: #e2f2dc;
+    color: var(--farm-green-dark);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: .95rem;
+}
+
+.lang-names {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.lang-names strong {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.lang-names small {
+    color: var(--farm-ink-soft);
+    font-size: .78rem;
+}
+
+.lang-check {
+    margin-left: auto;
+    color: var(--farm-green);
+    font-size: 1.05rem;
+    opacity: 0;
+    transform: scale(.6);
+    transition: opacity .2s, transform .2s;
+}
+
+.lang-option:hover .lang-badge {
+    background: var(--farm-green);
+    color: var(--farm-white);
+}
+
+.lang-option.active {
+    background: var(--farm-mist);
+    box-shadow: inset 0 0 0 2px var(--farm-lime);
+}
+
+.lang-option.active .lang-badge {
+    background: var(--farm-green);
+    color: var(--farm-white);
+}
+
+.lang-option.active .lang-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Tablet / desktop chhote: sirf chhota label (EN / हि) */
+@media (max-width: 1199.98px) {
+    .lang-btn-name {
+        display: none;
+    }
+
+    .lang-btn-short {
+        display: inline;
+        min-width: 1.3em;
+        text-align: center;
+    }
+}
+
+/* Mobile: account icon jaisa chhota square button, andar gol badge me EN / हि */
+@media (max-width: 767.98px) {
+    .lang-btn {
+        justify-content: center;
+        width: 44px;
+        padding: 0;
+        border-width: 0;
+        border-radius: 12px;
+    }
+
+    .lang-btn-icon,
+    .lang-btn-caret {
+        display: none;
+    }
+
+    .lang-btn-short {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--farm-green);
+        color: var(--farm-white);
+        font-family: var(--font-display);
+        font-size: .82rem;
+        font-weight: 800;
+    }
+
+    /* Logo zarurat ho to thoda chhota ho jaye, taaki sab ek line me rahe */
+    .top-bar .brand-logo {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+
+    /* menu + bhasha + account = 3 button (44px) + gaps; baaki jagah logo ki */
+    .top-bar .brand-logo-img {
+        max-width: min(200px, calc(100vw - 210px)) !important;
+    }
+
+    .lang-menu {
+        --bs-dropdown-min-width: 14rem;
+        position: absolute;
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (max-width: 359.98px) {
+    .lang-btn-icon {
+        width: 24px;
+        height: 24px;
+        font-size: .75rem;
+    }
+}
+
+html.translating {
+    background: #f1f8ee;
+}
+
+html.translating body {
+    opacity: 0;
+}
+
+body {
+    transition: opacity .3s ease;
+}
+
+/* Ghoomta hua ring (hara + peela) */
+html.translating::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    width: 84px;
+    height: 84px;
+    margin: -70px 0 0 -42px;
+    border-radius: 50%;
+    border: 5px solid #d9e8d3;
+    border-top-color: #1d7a3a;
+    border-right-color: #f5b324;
+    animation: km-spin .9s linear infinite;
+}
+
+/* Beech me paudha + neeche message */
+html.translating::after {
+    content: "Loading…";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    width: 260px;
+    margin: -70px 0 0 -130px;
+    padding-top: 104px;
+    text-align: center;
+    font: 700 1rem/1.4 "Baloo 2", "Mukta", system-ui, sans-serif;
+    color: #135c2a;
+    letter-spacing: .01em;
+    /*background: no-repeat center 17px / 50px 50px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231d7a3a'/%3E%3Cpath d='M32 50V30' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M32 34c-1-8-7-12-15-12 0 8 6 13 15 12z' fill='%238cc63f'/%3E%3Cpath d='M32 30c1-9 8-14 17-14 0 9-7 15-17 14z' fill='%23fff'/%3E%3Cpath d='M22 50h20' stroke='%23f5b324' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");*/
+    background: no-repeat center 17px / 50px 50px url("../image/favicon.png");
+    animation: km-fade 1.6s ease-in-out infinite;
+}
+
+html[data-loading-lang="hi"].translating::after {
+    content: "लोड हो रहा है…";
+}
+
+html[data-loading-lang="mr"].translating::after {
+    content: "लोड होत आहे…";
+}
+
+html[data-loading-lang="gu"].translating::after {
+    content: "લોડ થઈ રહ્યું છે…";
+}
+
+@keyframes km-fade {
+    0%, 100% { opacity: .55; }
+    50%      { opacity: 1; }
+}
+
+@keyframes km-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes km-fade {
+    50% {
+        color: #1d7a3a;
+        opacity: .8;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.translating::before {
+        animation-duration: 2.4s;
+    }
+
+    html.translating::after {
+        animation: none;
+    }
+}
+
+/* ---------- Google Translate ka apna UI chhupao (aapke rules, ek jagah) ---------- */
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-l4eHX-hSRGPd,
+.skiptranslate iframe,
+.goog-te-banner-frame {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+font[style],
+font,
+.goog-text-highlight,
+.goog-text-highlight:hover,
+.goog-text-highlight:focus {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.translated-ltr font,
+.translated-rtl font {
+    pointer-events: none;
+}

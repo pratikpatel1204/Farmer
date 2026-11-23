@@ -1,0 +1,578 @@
+/* =========================================================
+   KisanMandi - Survey
+   1) Home hero ke right side me survey card (I Want / I Have ki jagah)
+   2) Survey page (/survey)
+   Rang (--farm-*) header.css ke :root se aate hain.
+   ========================================================= */
+
+/* ---------- 1) Hero survey card ---------- */
+.hero-survey {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background-color: #e9f6e3;
+    background-image: radial-gradient(circle at 100% 0, #cfeabf 0 22%, transparent 23%);
+    border: 1px solid var(--farm-line);
+}
+
+@media (min-width: 768px) {
+    .hero-survey {
+        padding: 1.1rem 1.25rem;
+    }
+}
+
+.hero-survey-art {
+    position: absolute;
+    top: .6rem;
+    right: .9rem;
+    font-size: 2.6rem;
+    color: var(--farm-green);
+    opacity: .18;
+    pointer-events: none;
+}
+
+.hero-survey-head {
+    position: relative;
+    padding-right: 3rem;
+}
+
+.hero-survey-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .15rem .6rem;
+    border-radius: 50rem;
+    background: var(--farm-green);
+    color: var(--farm-white);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.hero-survey-title {
+    margin: .4rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.05rem, .9rem + .6vw, 1.4rem);
+    line-height: 1.15;
+    color: var(--farm-green-dark);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* List: bachi hui height le leti hai, jo question pura na aaye wo JS chhupa deta hai */
+.hero-survey-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: .7rem 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+}
+
+.hero-survey-item {
+    flex-shrink: 0;
+}
+
+.hero-survey-item[hidden] {
+    display: none;
+}
+
+/* Mobile: height auto hai, isliye max 2 question */
+@media (max-width: 767.98px) {
+    .hero-survey-item:nth-child(n+3) {
+        display: none;
+    }
+}
+
+.hero-survey-link {
+    display: flex;
+    gap: .65rem;
+    padding: .6rem .75rem;
+    border-radius: .9rem;
+    background: var(--farm-white);
+    border: 1px solid var(--farm-line);
+    color: var(--farm-ink);
+    text-decoration: none;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+
+.hero-survey-link:hover,
+.hero-survey-link:focus-visible {
+    color: var(--farm-ink);
+    border-color: var(--farm-green);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(19, 92, 42, .12);
+}
+
+.hero-survey-no {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--farm-yellow);
+    color: var(--farm-ink);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: .9rem;
+}
+
+.hero-survey-body {
+    min-width: 0;
+    display: block;
+}
+
+.hero-survey-q {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 600;
+    font-size: .95rem;
+    line-height: 1.3;
+}
+
+.hero-survey-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+    margin-top: .4rem;
+}
+
+.hero-survey-option {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .05rem .55rem;
+    border-radius: 50rem;
+    background: var(--farm-mist);
+    border: 1px solid var(--farm-line);
+    font-size: .75rem;
+    color: var(--farm-ink-soft);
+    white-space: nowrap;
+}
+
+.hero-survey-option::before {
+    content: "";
+    width: .55rem;
+    height: .55rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--farm-green);
+    background: var(--farm-white);
+}
+
+.hero-survey-option.is-more::before {
+    display: none;
+}
+
+.hero-survey-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+}
+
+.hero-survey-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--farm-ink-soft);
+}
+
+.hero-survey-meta .fa-circle-check {
+    color: var(--farm-green);
+}
+
+.btn-survey {
+    --bs-btn-padding-x: 1.1rem;
+    --bs-btn-font-weight: 700;
+    --bs-btn-color: var(--farm-white);
+    --bs-btn-bg: var(--farm-green);
+    --bs-btn-border-color: var(--farm-green);
+    --bs-btn-border-radius: 50rem;
+    --bs-btn-hover-color: var(--farm-white);
+    --bs-btn-hover-bg: var(--farm-green-dark);
+    --bs-btn-hover-border-color: var(--farm-green-dark);
+    --bs-btn-active-color: var(--farm-white);
+    --bs-btn-active-bg: var(--farm-green-dark);
+    white-space: nowrap;
+}
+
+/* ---------- 2) Survey page ---------- */
+.survey-wrap {
+    max-width: 52rem;
+    margin: 0 auto;
+}
+
+.survey-count {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .5rem;
+    font-weight: 600;
+    color: var(--farm-ink-soft);
+}
+
+.survey-count i {
+    color: var(--farm-green);
+}
+
+.survey-question {
+    scroll-margin-top: 7rem;
+    margin-bottom: 1rem;
+    padding: 1.1rem;
+    border-radius: 1rem;
+    background: var(--farm-white);
+    border: 1px solid var(--farm-line);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+@media (min-width: 768px) {
+    .survey-question {
+        padding: 1.4rem 1.5rem;
+    }
+}
+
+.survey-question:target,
+.survey-question.is-focus {
+    border-color: var(--farm-yellow);
+    box-shadow: 0 0 0 4px rgba(245, 179, 36, .25);
+}
+
+.survey-question.is-missing {
+    border-color: var(--farm-red);
+    box-shadow: 0 0 0 4px rgba(226, 85, 45, .12);
+}
+
+.survey-q-head {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-bottom: .9rem;
+}
+
+.survey-q-no {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    min-width: 2.4rem;
+    height: 2.4rem;
+    padding: 0 .4rem;
+    border-radius: .75rem;
+    background: var(--farm-green);
+    color: var(--farm-white);
+    font-family: var(--font-display);
+    font-weight: 800;
+}
+
+.survey-q-text {
+    flex: 1;
+    min-width: 0;
+    padding-top: .3rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--farm-ink);
+}
+
+.survey-q-text > :last-child {
+    margin-bottom: 0;
+}
+
+.survey-q-text img {
+    max-width: 100%;
+    height: auto;
+    border-radius: .6rem;
+}
+
+.survey-options {
+    display: grid;
+    gap: .6rem;
+}
+
+@media (min-width: 768px) {
+    .survey-options {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.survey-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    margin: 0;
+    padding: .7rem .9rem;
+    border-radius: .9rem;
+    border: 2px solid var(--farm-line);
+    background: var(--farm-white);
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+}
+
+.survey-option:hover {
+    border-color: var(--farm-lime);
+}
+
+.survey-option-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+.survey-option-letter {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--farm-mist);
+    color: var(--farm-green-dark);
+    font-family: var(--font-display);
+    font-weight: 800;
+    transition: background .15s, color .15s;
+}
+
+.survey-option-text {
+    flex: 1;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.survey-option-tick {
+    color: var(--farm-green);
+    font-size: 1.15rem;
+    opacity: 0;
+    transform: scale(.6);
+    transition: opacity .15s, transform .15s;
+}
+
+.survey-option.is-checked,
+.survey-option:has(.survey-option-input:checked) {
+    border-color: var(--farm-green);
+    background: #eef8ea;
+}
+
+.survey-option.is-checked .survey-option-letter,
+.survey-option:has(.survey-option-input:checked) .survey-option-letter {
+    background: var(--farm-green);
+    color: var(--farm-white);
+}
+
+.survey-option.is-checked .survey-option-tick,
+.survey-option:has(.survey-option-input:checked) .survey-option-tick {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.survey-option:has(.survey-option-input:focus-visible) {
+    outline: 3px solid rgba(245, 179, 36, .6);
+    outline-offset: 2px;
+}
+
+.survey-option.is-disabled {
+    cursor: default;
+}
+
+.survey-option.is-disabled:hover {
+    border-color: var(--farm-line);
+}
+
+.survey-q-error {
+    margin: .7rem 0 0;
+    font-size: .9rem;
+    font-weight: 600;
+    color: #a83a1b;
+}
+
+/* Niche chipka hua submit bar */
+.survey-submit-bar {
+    position: sticky;
+    bottom: .75rem;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-top: 1.25rem;
+    padding: .8rem 1rem;
+    border-radius: 1rem;
+    background: var(--farm-white);
+    border: 1px solid var(--farm-line);
+    box-shadow: 0 10px 30px rgba(19, 92, 42, .15);
+}
+
+.survey-progress {
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+
+.survey-progress-text {
+    display: block;
+    font-weight: 700;
+    color: var(--farm-green-dark);
+}
+
+.survey-progress-track {
+    display: block;
+    height: .45rem;
+    margin-top: .35rem;
+    border-radius: 50rem;
+    background: var(--farm-mist);
+    overflow: hidden;
+}
+
+.survey-progress-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--farm-lime), var(--farm-green));
+    transition: width .25s;
+}
+
+.survey-footnote {
+    margin: .75rem 0 0;
+    font-size: .88rem;
+    color: var(--farm-ink-soft);
+    text-align: center;
+}
+
+/* Guest: login box */
+.survey-login {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    border-radius: 1rem;
+    background: #fff4d6;
+    border: 1px solid #f6dc95;
+}
+
+.survey-login-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--farm-yellow);
+    color: var(--farm-ink);
+    font-size: 1.2rem;
+}
+
+.survey-login-body {
+    flex: 1 1 16rem;
+}
+
+.survey-login-body h2 {
+    margin: 0 0 .2rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--farm-brown);
+}
+
+.survey-login-body p {
+    margin: 0;
+    color: var(--farm-ink-soft);
+}
+
+.survey-login-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+/* Submit ke baad: Thank you */
+.survey-thanks {
+    padding: 2rem 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--farm-white);
+    border: 1px solid var(--farm-line);
+    text-align: center;
+}
+
+.survey-thanks-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: .75rem;
+    border-radius: 50%;
+    background: #e5f4e0;
+    color: var(--farm-green);
+    font-size: 1.9rem;
+}
+
+.survey-thanks h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+    color: var(--farm-green-dark);
+}
+
+.survey-thanks p {
+    max-width: 32rem;
+    margin: 0 auto;
+    color: var(--farm-ink-soft);
+}
+
+.survey-edit-note {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: .5rem;
+    max-width: 34rem;
+    margin-top: 1rem;
+    padding: .65rem .9rem;
+    border-radius: .8rem;
+    background: #fff4d6;
+    color: var(--farm-brown);
+    font-size: .92rem;
+    text-align: left;
+}
+
+.survey-edit-note i {
+    margin-top: .2rem;
+}
+
+.survey-edit-note.is-locked {
+    background: var(--farm-mist);
+    color: var(--farm-green-dark);
+}
+
+.survey-home-link {
+    font-weight: 700;
+    color: var(--farm-green-dark);
+    text-decoration: none;
+}
+
+.survey-home-link:hover {
+    color: var(--farm-red);
+}
+
+/* Tablet / chhota laptop: hero chhota hai, options ek hi line me taaki 2 question aa sakein */
+@media (max-width: 1199.98px) {
+    .hero-survey-options {
+        flex-wrap: nowrap;
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+        mask-image: linear-gradient(90deg, #000 85%, transparent);
+    }
+}

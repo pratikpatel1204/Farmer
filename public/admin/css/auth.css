@@ -1,0 +1,288 @@
+/* ==========================================================
+   AUTH – Centered card on deep teal background
+   ========================================================== */
+:root {
+    --auth-bg: #0E2A33;
+    --auth-bg-2: #14414A;
+    --auth-primary: #0F766E;
+    --auth-primary-dark: #0B5A54;
+    --auth-accent: #F5B544;
+    --auth-card-bg: #FFFFFF;
+    --auth-text: #10222A;
+    --auth-muted: #5F7279;
+    --auth-border: #D9E2E5;
+    --auth-field-bg: #F5F8F9;
+    --auth-danger: #DC2626;
+    --auth-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.auth-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: var(--auth-text);
+    background-color: var(--auth-bg);
+    background-image:
+        radial-gradient(60rem 40rem at 85% -10%, rgba(245, 181, 68, 0.16), transparent 60%),
+        radial-gradient(50rem 40rem at -10% 110%, rgba(20, 184, 166, 0.22), transparent 60%),
+        linear-gradient(160deg, var(--auth-bg) 0%, var(--auth-bg-2) 100%);
+    background-attachment: fixed;
+}
+
+/* ===== CARD ===== */
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--auth-card-bg);
+    border-radius: 1.5rem;
+    padding: 2.5rem 2.25rem 2.25rem;
+    box-shadow: var(--auth-shadow);
+    border-top: 5px solid var(--auth-accent);
+}
+
+.auth-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.auth-logo img {
+    height: 52px;
+    width: auto;
+    max-width: 100%;
+}
+
+.auth-form-header {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.auth-form-header h2 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+}
+
+.auth-form-header p {
+    color: var(--auth-muted);
+    font-size: 0.92rem;
+}
+
+/* ===== FIELDS ===== */
+.auth-field {
+    margin-bottom: 1.15rem;
+}
+
+.auth-field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.auth-input-group {
+    display: flex;
+    align-items: center;
+    background: var(--auth-field-bg);
+    border: 1.5px solid var(--auth-border);
+    border-radius: 0.8rem;
+    padding: 0 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.auth-input-group:focus-within {
+    border-color: var(--auth-primary);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.14);
+}
+
+.auth-input-group.is-invalid {
+    border-color: var(--auth-danger);
+    background: #FEF4F4;
+}
+
+.auth-input-group.is-invalid:focus-within {
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
+}
+
+.auth-input-icon {
+    display: flex;
+    align-items: center;
+    color: var(--auth-muted);
+    font-size: 1.15rem;
+    margin-right: 0.65rem;
+}
+
+.auth-prefix {
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding-right: 0.65rem;
+    margin-right: 0.65rem;
+    border-right: 1.5px solid var(--auth-border);
+    line-height: 1.4;
+}
+
+.auth-input-group input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0.85rem 0;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--auth-text);
+}
+
+.auth-input-group input::placeholder {
+    color: #9AABB1;
+}
+
+.auth-toggle-password {
+    border: none;
+    background: transparent;
+    color: var(--auth-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.auth-toggle-password:hover,
+.auth-toggle-password:focus-visible {
+    color: var(--auth-text);
+    outline: none;
+}
+
+.auth-error {
+    display: block;
+    min-height: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--auth-danger);
+    margin-top: 0.35rem;
+}
+
+.auth-error:empty {
+    display: none;
+}
+
+/* ===== REMEMBER ===== */
+.auth-remember {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--auth-muted);
+    cursor: pointer;
+    margin: 0.35rem 0 1.5rem;
+    width: fit-content;
+}
+
+.auth-remember input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--auth-primary);
+    cursor: pointer;
+}
+
+/* ===== BUTTON + LOADER ===== */
+.auth-btn {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 0.8rem;
+    background: var(--auth-primary);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    box-shadow: 0 8px 18px -6px rgba(15, 118, 110, 0.6);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.auth-btn:hover:not(:disabled) {
+    background: var(--auth-primary-dark);
+}
+
+.auth-btn:active:not(:disabled) {
+    transform: scale(0.985);
+}
+
+.auth-btn:focus-visible {
+    outline: 3px solid rgba(245, 181, 68, 0.7);
+    outline-offset: 2px;
+}
+
+.auth-btn:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.auth-spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: auth-spin 0.7s linear infinite;
+}
+
+.auth-btn.is-loading .auth-spinner {
+    display: inline-block;
+}
+
+@keyframes auth-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== TOASTR ===== */
+.toast-success {
+    background-color: var(--auth-primary) !important;
+}
+
+.toast-error {
+    background-color: var(--auth-danger) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 2rem 1.35rem 1.75rem;
+        border-radius: 1.25rem;
+    }
+
+    .auth-form-header h2 {
+        font-size: 1.45rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-spinner {
+        animation-duration: 1.6s;
+    }
+
+    * {
+        transition: none !important;
+    }
+}
