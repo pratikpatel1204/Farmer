@@ -333,11 +333,21 @@
         margin-left: auto;
     }
 
+    /* Mobile drawer: 3 column (chhote phone par 2 / 1), andar scroll */
     .category-menu {
         display: none;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-content: start;
+        max-height: 50vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
         margin: 4px 0 6px;
         background: var(--farm-mist);
+    }
+
+    .category-menu .dropdown-item {
+        white-space: normal;
+        line-height: 1.25;
     }
 
     .category-menu.show {
@@ -423,17 +433,33 @@
         color: var(--farm-white);
     }
 
+    /* Desktop: 3 column, zyada categories ho to menu ke andar scroll */
     .category-menu {
         display: none;
-        grid-template-columns: 1fr 1fr;
-        min-width: 340px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-content: start;
+        column-gap: 4px;
+        width: min(660px, 92vw);
+        max-height: min(440px, calc(100vh - 160px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
         margin-top: 0 !important;
         border-top: 4px solid var(--farm-yellow);
         box-shadow: 0 14px 30px rgba(19, 92, 42, .22);
     }
 
     .category-menu .dropdown-item {
-        white-space: nowrap;
+        white-space: normal;
+        line-height: 1.25;
+    }
+
+    /* Chauda menu "Category" ke neeche center me. Click par Bootstrap
+       [data-bs-popper] left:0 lagata hai, isliye selector strong rakha hai. */
+    .main-nav .category-dropdown .category-menu,
+    .main-nav .category-dropdown .category-menu[data-bs-popper] {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
     }
 
     /* Desktop par hover se bhi khule */
@@ -467,10 +493,31 @@
     }
 }
 
+@media (max-width: 575.98px) {
+    .category-menu {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 @media (max-width: 380px) {
     .category-menu {
         grid-template-columns: 1fr;
     }
+}
+
+/* Category menu ka patla scrollbar */
+.category-menu {
+    scrollbar-width: thin;
+    scrollbar-color: var(--farm-green) transparent;
+}
+
+.category-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.category-menu::-webkit-scrollbar-thumb {
+    background: var(--farm-green);
+    border-radius: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {

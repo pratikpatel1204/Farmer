@@ -263,8 +263,8 @@
                                         'Yes. Registering, listing your produce and posting your requirements is completely free.',
                                     ],
                                     [
-                                        'What is the difference between I Want and I Have?',
-                                        'I Have shows produce that farmers are selling. I Want shows what buyers are looking for. Farmers can check I Want to find new buyers.',
+                                        'What is the difference between People Want and People Have?',
+                                        'People Have shows produce that farmers are selling. People Want shows what buyers are looking for. Farmers can check People Want to find new buyers.',
                                     ],
                                     [
                                         'How do I get the blue verified tick?',

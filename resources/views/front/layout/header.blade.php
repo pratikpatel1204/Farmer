@@ -141,13 +141,13 @@
                         <li class="nav-item">
                             <a class="nav-link nav-cta nav-cta-want {{ request()->is('i-want*') ? 'active' : '' }}"
                                 href="{{ url('i-want') }}">
-                                <i class="fa-solid fa-cart-shopping nav-cta-icon"></i>I Want
+                                <i class="fa-solid fa-cart-shopping nav-cta-icon"></i>People Want
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-cta nav-cta-have {{ request()->is('i-have*') ? 'active' : '' }}"
                                 href="{{ url('i-have') }}">
-                                <i class="fa-solid fa-seedling nav-cta-icon"></i>I Have
+                                <i class="fa-solid fa-seedling nav-cta-icon"></i>People Have
                             </a>
                         </li>
                         <li class="nav-item dropdown category-dropdown">

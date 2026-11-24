@@ -46,7 +46,11 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <a href="{{ route('admin.product.view', $p->id) }}" class="avatar avatar-md me-2">
-                                <img src="{{ asset($p->main_image) }}" class="rounded" alt="{{ $p->title }}">
+                                @if ($thumb = \App\Support\Market::productImage($p))
+                                    <img src="{{ $thumb }}" class="rounded" alt="{{ $p->title }}">
+                                @else
+                                    <span class="avatar-title rounded bg-light text-muted"><i class="ti ti-photo"></i></span>
+                                @endif
                             </a>
                             <h6 class="fw-medium mb-0">
                                 <a href="{{ route('admin.product.view', $p->id) }}">{{ $p->title }}</a>

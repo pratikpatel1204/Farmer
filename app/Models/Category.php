@@ -18,6 +18,11 @@ class Category extends Model
         'meta_description',
     ];
 
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+
     // public function products()
     // {
     //     return $this->hasMany(Product::class, 'category', 'id');   // pehle se hai

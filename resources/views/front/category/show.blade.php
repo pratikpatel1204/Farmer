@@ -76,9 +76,9 @@
                             <nav class="type-tabs" aria-label="Listing type">
                                 <a href="{{ $tabUrl(null) }}" class="{{ $type ? '' : 'active' }}">All</a>
                                 <a href="{{ $tabUrl('have') }}" class="{{ $type === 'have' ? 'active' : '' }}"><i
-                                        class="fa-solid fa-seedling"></i>I Have</a>
+                                        class="fa-solid fa-seedling"></i>People Have</a>
                                 <a href="{{ $tabUrl('want') }}" class="{{ $type === 'want' ? 'active' : '' }}"><i
-                                        class="fa-solid fa-cart-shopping"></i>I Want</a>
+                                        class="fa-solid fa-cart-shopping"></i>People Want</a>
                             </nav>
                             <div class="toolbar-actions">
                                 <button class="btn btn-filter d-lg-none" type="button" data-bs-toggle="offcanvas"

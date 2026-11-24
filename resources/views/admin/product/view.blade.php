@@ -36,8 +36,13 @@
             <div class="col-lg-5">
                 <div class="card">
                     <div class="card-body">
-                        <img src="{{ asset($product->main_image) }}" class="img-fluid rounded w-100 mb-3"
-                            alt="{{ $product->title }}">
+                        @if ($mainImage = \App\Support\Market::productImage($product))
+                            <img src="{{ $mainImage }}" class="img-fluid rounded w-100 mb-3"
+                                alt="{{ $product->title }}">
+                            @if (empty($product->main_image))
+                                <small class="text-muted d-block mb-3">No product image uploaded. Showing the category image.</small>
+                            @endif
+                        @endif
                         @if (count($product->sub_images))
                             <div class="row g-2">
                                 @foreach ($product->sub_images as $img)

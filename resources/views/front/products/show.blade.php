@@ -43,7 +43,7 @@
             <nav class="detail-breadcrumb" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ $listUrl }}">{{ $isWant ? 'I Want' : 'I Have' }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ $listUrl }}">{{ $isWant ? 'People Want' : 'People Have' }}</a></li>
                     @if ($category)
                         <li class="breadcrumb-item"><a href="{{ $categoryUrl }}">{{ $category->name }}</a></li>
                     @endif

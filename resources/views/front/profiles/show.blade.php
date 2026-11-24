@@ -76,8 +76,8 @@
 
                 <div class="profile-hero-stats">
                     <div><strong>{{ $products->count() }}</strong><span>Listings</span></div>
-                    <div><strong>{{ $haveProducts->count() }}</strong><span>I Have</span></div>
-                    <div><strong>{{ $wantProducts->count() }}</strong><span>I Want</span></div>
+                    <div><strong>{{ $haveProducts->count() }}</strong><span>People Have</span></div>
+                    <div><strong>{{ $wantProducts->count() }}</strong><span>People Want</span></div>
                     <div><strong>{{ $details['established'] ?: '-' }}</strong><span>Since</span></div>
                 </div>
             </section>
@@ -175,8 +175,8 @@
                 @if ($haveProducts->count() && $wantProducts->count())
                     <nav class="type-tabs" role="tablist" aria-label="Listing type">
                         <a href="#tabAll" class="active" data-bs-toggle="tab" role="tab" aria-controls="tabAll" aria-selected="true">All ({{ $products->count() }})</a>
-                        <a href="#tabHave" data-bs-toggle="tab" role="tab" aria-controls="tabHave" aria-selected="false"><i class="fa-solid fa-seedling"></i>I Have ({{ $haveProducts->count() }})</a>
-                        <a href="#tabWant" data-bs-toggle="tab" role="tab" aria-controls="tabWant" aria-selected="false"><i class="fa-solid fa-cart-shopping"></i>I Want ({{ $wantProducts->count() }})</a>
+                        <a href="#tabHave" data-bs-toggle="tab" role="tab" aria-controls="tabHave" aria-selected="false"><i class="fa-solid fa-seedling"></i>People Have ({{ $haveProducts->count() }})</a>
+                        <a href="#tabWant" data-bs-toggle="tab" role="tab" aria-controls="tabWant" aria-selected="false"><i class="fa-solid fa-cart-shopping"></i>People Want ({{ $wantProducts->count() }})</a>
                     </nav>
                 @endif
             </div>

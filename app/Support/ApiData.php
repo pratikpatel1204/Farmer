@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class ApiData
 {
     /** Product list ke liye relations (N+1 query se bachne ke liye) */
-    public const PRODUCT_WITH = ['member.states', 'member.citys', 'categorys'];
+    public const PRODUCT_WITH = ['member.states', 'member.citys', 'categorys', 'subCategory'];
 
     /** Notification type -> app ka screen */
     public const NOTIFICATION_SCREENS = [
@@ -118,18 +118,28 @@ class ApiData
         return $data;
     }
 
+    /** Sub category { id, name } ya null */
+    public static function subCategory($subCategory): ?array
+    {
+        return $subCategory ? ['id' => $subCategory->id, 'name' => $subCategory->name] : null;
+    }
+
     /** Product card (list, home, related). $product = Eloquent Product with PRODUCT_WITH */
     public static function productCard($product): array
     {
         $member = $product->member;
+        // Main image, warna People Want (want) me category ki image (website jaisa)
+        $image = Market::productImage($product);
 
         return [
             'id'        => $product->id,
             'slug'      => $product->slug ?: (string) $product->id,
             'title'     => $product->title,
             'type'      => Market::typeOf($product),
-            'image'     => self::url($product->main_image),
+            'image'     => $image,
+            'image_is_category' => $image !== null && trim((string) $product->main_image) === '',
             'category'  => self::category($product->categorys),
+            'sub_category' => self::subCategory($product->subCategory),
             'owner'     => [
                 'name'      => $member->full_name ?? null,
                 'unique_id' => $member->unique_id ?? null,

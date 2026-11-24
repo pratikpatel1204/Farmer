@@ -152,14 +152,14 @@
                     {{-- Koi Active survey nahi: purane static banner --}}
                     <div class="hero-banners">
                         <a href="{{ url('i-want') }}" class="hero-banner banner-want">
-                            <span class="hero-banner-label"><i class="fa-solid fa-cart-shopping"></i>I Want</span>
+                            <span class="hero-banner-label"><i class="fa-solid fa-cart-shopping"></i>People Want</span>
                             <h3 class="hero-banner-title">Want to buy? Tell us your need</h3>
                             <p class="hero-banner-text">Post your requirement and the right farmers will reach you.</p>
                             <span class="hero-banner-link">View all <i class="fa-solid fa-arrow-right ms-1"></i></span>
                             <i class="fa-solid fa-basket-shopping hero-banner-art" aria-hidden="true"></i>
                         </a>
                         <a href="{{ url('i-have') }}" class="hero-banner banner-have">
-                            <span class="hero-banner-label"><i class="fa-solid fa-seedling"></i>I Have</span>
+                            <span class="hero-banner-label"><i class="fa-solid fa-seedling"></i>People Have</span>
                             <h3 class="hero-banner-title">Want to sell? List your crop</h3>
                             <p class="hero-banner-text">Add photos, set your price and find buyers.</p>
                             <span class="hero-banner-link">View all <i

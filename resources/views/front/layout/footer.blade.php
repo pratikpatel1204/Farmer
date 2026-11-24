@@ -20,8 +20,8 @@ Naya footer (header jaisa design). Apna purana footer rakhna ho to ye file copy 
             <div class="col-6 col-md-4 col-lg-2">
                 <h2 class="footer-title">Explore</h2>
                 <ul class="footer-links">
-                    <li><a href="{{ url('i-have') }}">I Have</a></li>
-                    <li><a href="{{ url('i-want') }}">I Want</a></li>
+                    <li><a href="{{ url('i-have') }}">People Have</a></li>
+                    <li><a href="{{ url('i-want') }}">People Want</a></li>
                     <li><a href="{{ url('category') }}">Categories</a></li>
                     <li><a href="{{ url('blog') }}">Blog</a></li>
                 </ul>

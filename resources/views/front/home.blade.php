@@ -28,9 +28,9 @@
             <div class="container-fluid">
                 <div class="section-head">
                     <div>
-                        <span class="section-eyebrow"><i class="fa-solid fa-cart-shopping"></i>I Want</span>
-                        <h2 class="section-title">Buyers are looking for</h2>
-                        <p class="section-subtitle">Latest requirements from buyers. If you have it, get in touch.</p>
+                        <span class="section-eyebrow"><i class="fa-solid fa-cart-shopping"></i>People Want</span>
+                        <h2 class="section-title">Members are looking for </h2>
+                        <p class="section-subtitle">Latest requirements from members. If you have it, get in touch.</p>
                     </div>
                     <div class="section-actions">
                         <button class="slider-arrow" type="button" data-slider-prev="#wantSlider" aria-label="Previous"><i
@@ -68,9 +68,9 @@
             <div class="container-fluid">
                 <div class="section-head">
                     <div>
-                        <span class="section-eyebrow"><i class="fa-solid fa-seedling"></i>I Have</span>
-                        <h2 class="section-title">Ready stock from farmers</h2>
-                        <p class="section-subtitle">Straight from the farm. Like something? Talk to the farmer.</p>
+                        <span class="section-eyebrow"><i class="fa-solid fa-seedling"></i>People Have</span>
+                        <h2 class="section-title">Available products and services</h2>
+                        <p class="section-subtitle">Fresh listing from members.</p>
                     </div>
                     <div class="section-actions">
                         <button class="slider-arrow" type="button" data-slider-prev="#haveSlider"
@@ -109,8 +109,7 @@
                 <div class="section-head">
                     <div>
                         <span class="section-eyebrow"><i class="fa-solid fa-users"></i>Our members</span>
-                        <h2 class="section-title">Farmers and buyers in one place</h2>
-                        <p class="section-subtitle">Browse Farmer and Non Farmer profiles and connect directly.</p>
+                        <h2 class="section-title">Connecting India in One Place</h2>
                     </div>
                     <div class="section-actions flex-wrap">
                         <div class="profile-filter" data-profile-filter="#profileSlider" role="group"

@@ -5,6 +5,7 @@
                 <th>#</th>
                 <th width="100">Image</th>
                 <th>Category Name</th>
+                <th width="140">Sub Categories</th>
                 <th width="120">Action</th>
             </tr>
         </thead>
@@ -22,6 +23,10 @@
                     </td>
                     <td>{{ $category->name }}</td>
                     <td>
+                        <a href="{{ route('admin.sub-category.index', ['category_id' => $category->id]) }}" class="badge bg-primary text-decoration-none"
+                            title="View sub categories">{{ $category->sub_categories_count }}</a>
+                    </td>
+                    <td>
                         <button class="btn btn-sm btn-info editCategoryBtn" data-id="{{ $category->id }}"
                             data-name="{{ $category->name }}"
                             data-image="{{ $category->image ? asset($category->image) : '' }}">
@@ -34,7 +39,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="text-center">No categories found</td>
+                    <td colspan="5" class="text-center">No categories found</td>
                 </tr>
             @endforelse
         </tbody>

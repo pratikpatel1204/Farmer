@@ -258,6 +258,30 @@ class Market
         return asset(\Illuminate\Support\Str::contains($image, '/') ? $image : 'uploads/categories/' . $image);
     }
 
+    /**
+     * Product card / detail ki image ka URL.
+     * Product ki main image ho to wahi. People Want (want) product me image na ho to uski category ki image.
+     * Kuch na mile to null (tab icon dikhega). Eloquent Product aur DB row dono par chalta hai.
+     */
+    public static function productImage($product): ?string
+    {
+        $main = trim((string) data_get($product, 'main_image', ''));
+        if ($main !== '') {
+            return \Illuminate\Support\Str::startsWith($main, ['http://', 'https://']) ? $main : asset($main);
+        }
+
+        if (self::typeOf($product) !== 'want') {
+            return null;
+        }
+
+        $categoryId = (string) data_get($product, 'category', '');
+        $category = $categoryId === ''
+            ? null
+            : self::tableCategories()->first(fn($c) => (string) $c->getKey() === $categoryId);
+
+        return $category ? self::categoryImage($category) : null;
+    }
+
     /** Icon + rang: config/kisanmandi.php me naam mile to wahan se, warna default */
     public static function categoryLook($category): array
     {

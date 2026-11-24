@@ -7,11 +7,13 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\ProductInquiry;
+use App\Models\SubCategory;
 use App\Support\Notify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProductMemberController extends Controller
 {
@@ -76,7 +78,8 @@ class ProductMemberController extends Controller
     public function product_create()
     {
         $categories = Category::all();
-        return view('member.products.create', compact('categories'));
+        $subCategories = $this->subCategoriesByCategory();
+        return view('member.products.create', compact('categories', 'subCategories'));
     }
 
     public function product_store(Request $request)
@@ -87,8 +90,10 @@ class ProductMemberController extends Controller
             'listing_type' => 'required|in:have,want',
             'title'        => 'required|string|max:255',
             'category'     => 'required|exists:categories,id',
+            // Sub category optional (I Have / I Want dono me), par selected category ki hi honi chahiye
+            'sub_category_id' => ['nullable', Rule::exists('sub_categories', 'id')->where('category_id', (int) $request->category)],
             'product_tags' => 'nullable|string|max:255',
-            'main_image'   => 'required|file|image|mimes:jpeg,png,jpg,webp|max:51200',
+            'main_image'   => 'required_if:listing_type,have|nullable|file|image|mimes:jpeg,png,jpg,webp|max:51200',
             'sub_images'   => 'nullable|array|max:4',
             'sub_images.*' => 'file|image|mimes:jpeg,png,jpg,webp|max:51200',
             'brochure'     => 'nullable|file|mimes:pdf|max:51200',
@@ -119,6 +124,7 @@ class ProductMemberController extends Controller
             $product->title        = trim($request->title);
             $product->product_tags = $request->product_tags;
             $product->category     = $request->category;
+            $product->sub_category_id = $request->filled('sub_category_id') ? (int) $request->sub_category_id : null;
             $product->listing_type = $request->listing_type;
             $product->description  = $request->description;
             $product->status       = 'Approved';
@@ -167,8 +173,17 @@ class ProductMemberController extends Controller
         $product = Product::where('member_id', $user->id)->findOrFail($id);
         $existingSpecs = ProductAttribute::where('product_id', $product->id)->get();
         $categories = Category::all();
+        $subCategories = $this->subCategoriesByCategory();
 
-        return view('member.products.edit', compact('product', 'existingSpecs', 'categories'));
+        return view('member.products.edit', compact('product', 'existingSpecs', 'categories', 'subCategories'));
+    }
+
+    /** { category_id: [{id, name}, ...] } : form me category badalte hi sub category dropdown bharne ke liye */
+    private function subCategoriesByCategory()
+    {
+        return SubCategory::orderBy('name')->get(['id', 'category_id', 'name'])
+            ->groupBy('category_id')
+            ->map(fn ($items) => $items->map(fn ($s) => ['id' => $s->id, 'name' => $s->name])->values());
     }
 
     public function product_update(Request $request)
@@ -180,6 +195,8 @@ class ProductMemberController extends Controller
             'listing_type' => 'required|in:have,want',
             'title'        => 'required|string|max:255',
             'category'     => 'required|exists:categories,id',
+            // Sub category optional (I Have / I Want dono me), par selected category ki hi honi chahiye
+            'sub_category_id' => ['nullable', Rule::exists('sub_categories', 'id')->where('category_id', (int) $request->category)],
             'product_tags' => 'nullable|string|max:255',
             'main_image'   => 'nullable|file|image|mimes:jpeg,png,jpg,webp|max:51200',
             'sub_images'   => 'nullable|array|max:4',
@@ -191,6 +208,17 @@ class ProductMemberController extends Controller
             'spec_value'   => 'nullable|array',
             'spec_value.*' => 'nullable|string|max:255',
         ]);
+
+        // I Have me main image zaroori hai: pehle se image nahi hai (jaise I Want se I Have kiya) to nayi upload karni padegi
+        $validator->after(function ($v) use ($request, $user) {
+            if ($request->listing_type !== 'have' || $request->hasFile('main_image')) {
+                return;
+            }
+            $existing = Product::where('member_id', $user->id)->whereKey($request->id)->value('main_image');
+            if (empty($existing)) {
+                $v->errors()->add('main_image', 'Main image is required for I Have listing.');
+            }
+        });
 
         if ($validator->fails()) {
             return response()->json([
@@ -207,6 +235,7 @@ class ProductMemberController extends Controller
             $product->title        = trim($request->title);
             $product->product_tags = $request->product_tags;
             $product->category     = $request->category;
+            $product->sub_category_id = $request->filled('sub_category_id') ? (int) $request->sub_category_id : null;
             $product->listing_type = $request->listing_type;
             $product->description  = $request->description;
 

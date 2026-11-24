@@ -124,7 +124,7 @@
                         </div>
 
                         <!-- Title -->
-                        <div class="col-md-6 form-group mb-3">
+                        <div class="col-md-4 form-group mb-3">
                             <label class="form-label fw-600">Product Title <span class="text-danger">*</span></label>
                             <input type="text" class="form-control-zentic" id="title" name="title"
                                 placeholder="Enter Product Title" value="{{ old('title', $product->title) }}">
@@ -132,7 +132,7 @@
                         </div>
 
                         <!-- Category -->
-                        <div class="col-md-6 form-group mb-3">
+                        <div class="col-md-4 form-group mb-3">
                             <label class="form-label fw-600">Category <span class="text-danger">*</span></label>
                             <select class="form-select-zentic select2" id="category" name="category"
                                 data-placeholder="Select Category">
@@ -145,6 +145,17 @@
                                 @endforeach
                             </select>
                             <div id="categoryError" class="error text-danger-c text-xs mt-1"></div>
+                        </div>
+
+                        <!-- Sub Category (optional, I Have / I Want dono me) -->
+                        <div class="col-md-4 form-group mb-3">
+                            <label class="form-label fw-600">Sub Category</label>
+                            <select class="form-select-zentic select2" id="sub_category_id" name="sub_category_id"
+                                data-placeholder="Select Sub Category"
+                                data-selected="{{ old('sub_category_id', $product->sub_category_id) }}">
+                                <option value="">Select Sub Category</option>
+                            </select>
+                            <div id="subCategoryError" class="error text-danger-c text-xs mt-1"></div>
                         </div>
 
                         <!-- Product Tags -->
@@ -161,7 +172,7 @@
 
                         <!-- Main Image Upload -->
                         <div class="col-md-4 form-group mb-3">
-                            <label class="form-label fw-600">Main Image</label>
+                            <label class="form-label fw-600">Main Image <span class="text-danger main-image-required">*</span></label>
                             <div class="zentic-card mb-0">
                                 <div class="zentic-card-body p-0">
                                     <div class="file-upload-zone" data-file-list="mainImageList">
@@ -180,6 +191,7 @@
                                     </div>
                                 @endif
                             </div>
+                            <small class="text-muted d-block mt-1 main-image-optional-hint">Optional for I Want. If empty, the category image will be shown.</small>
                             <div id="mainImageError" class="error text-danger-c text-xs mt-1"></div>
                         </div>
 
@@ -529,6 +541,7 @@
                 title: 'titleError',
                 category: 'categoryError',
                 product_tags: 'productTagsError',
+                sub_category_id: 'subCategoryError',
                 main_image: 'mainImageError',
                 sub_images: 'subImagesError',
                 brochure: 'brochureError',
@@ -594,4 +607,5 @@
             });
         });
     </script>
+    @include('member.products.partials.sub-category-script')
 @endpush

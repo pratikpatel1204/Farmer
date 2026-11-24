@@ -125,6 +125,11 @@ class ProductController extends Controller
             Market::imageList($product->sub_images)
         ))));
 
+        // People Want product me koi image nahi: category ki image dikhao
+        if (!$images && $type === 'want' && ($fallback = Market::productImage($product))) {
+            $images = [$fallback];
+        }
+
         // Social links profiles ke alag columns se (facebook, instagram, youtube, linkedin)
         $socials = collect(Market::profileLinks($profile))->except('website')->all();
 

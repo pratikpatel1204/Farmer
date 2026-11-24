@@ -12,6 +12,7 @@ use App\Support\Notify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 /**
  * Member ke apne products (website Member\ProductMemberController jaisa).
@@ -34,6 +35,14 @@ class ProductController extends ApiController
         'spec_value.*' => 'nullable|string|max:255',
     ];
 
+    /** Sub category optional (I Have / I Want dono me), par selected category ki hi honi chahiye */
+    private function subCategoryRule(Request $request): array
+    {
+        return [
+            'sub_category_id' => ['nullable', Rule::exists('sub_categories', 'id')->where('category_id', (int) $request->category)],
+        ];
+    }
+
     /** GET /me/products?status=All|Pending|Approved|Rejected|Completed&type=all|have|want&search=&page= */
     public function index(Request $request)
     {
@@ -42,7 +51,7 @@ class ProductController extends ApiController
         $search = trim((string) $request->query('search', ''));
         $like   = '%' . addcslashes($search, '%_\\') . '%';
 
-        $products = Product::with(['categorys', 'member.states', 'member.citys'])
+        $products = Product::with(['categorys', 'subCategory', 'member.states', 'member.citys'])
             ->addSelect(['inquiries_count' => ProductInquiry::selectRaw('COUNT(*)')->whereColumn('product_inquiries.product_id', 'products.id')])
             ->where('member_id', $request->user()->id)
             ->when($status === 'completed', fn ($q) => $q->whereNotNull('completed_at'))
@@ -66,15 +75,18 @@ class ProductController extends ApiController
     /** GET /me/products/{id}  (edit form ke liye poori detail) */
     public function show(Request $request, int $id)
     {
-        $product = Product::with('categorys')->where('member_id', $request->user()->id)->find($id);
+        $product = Product::with(['categorys', 'subCategory'])->where('member_id', $request->user()->id)->find($id);
 
         if (! $product) {
             return $this->fail('Product not found.', 404);
         }
 
+        // Edit form: main_image asli value (null ho sakti hai), category image fallback nahi
         return $this->ok($this->row($product) + [
             'listing_type' => $product->listing_type,
             'category_id'  => $product->{Market::categoryKey()},
+            'sub_category_id' => $product->sub_category_id,
+            'sub_category'    => ApiData::subCategory($product->subCategory),
             'product_tags' => $product->product_tags,
             'description'  => $product->description,
             'main_image'   => ApiData::url($product->main_image),
@@ -87,8 +99,11 @@ class ProductController extends ApiController
     /** POST /me/products  (multipart/form-data) */
     public function store(Request $request)
     {
-        $this->check($request, self::RULES + [
-            'main_image' => 'required|file|image|mimes:jpeg,png,jpg,webp|max:51200',
+        // Main image: I Have me required, I Want me optional (na ho to null)
+        $this->check($request, self::RULES + $this->subCategoryRule($request) + [
+            'main_image' => 'required_if:listing_type,have|nullable|file|image|mimes:jpeg,png,jpg,webp|max:51200',
+        ], [
+            'main_image.required_if' => 'Main image is required for I Have listing.',
         ]);
 
         try {
@@ -103,12 +118,15 @@ class ProductController extends ApiController
             $product->title        = trim($request->title);
             $product->product_tags = $request->product_tags;
             $product->category     = $request->category;
+            $product->sub_category_id = $request->filled('sub_category_id') ? (int) $request->sub_category_id : null;
             $product->listing_type = $request->listing_type;
             $product->description  = $request->description;
             $product->status       = 'Approved';
             // $product->status       = 'Pending';
 
-            $product->main_image = $this->storeFile($request->file('main_image'), 'uploads/product_images', 'main');
+            if ($request->hasFile('main_image')) {
+                $product->main_image = $this->storeFile($request->file('main_image'), 'uploads/product_images', 'main');
+            }
 
             if ($request->hasFile('sub_images')) {
                 $paths = [];
@@ -149,15 +167,29 @@ class ProductController extends ApiController
             return $this->fail('Product not found.', 404);
         }
 
-        $this->check($request, self::RULES + [
+        $this->check($request, self::RULES + $this->subCategoryRule($request) + [
             'main_image'      => 'nullable|file|image|mimes:jpeg,png,jpg,webp|max:51200',
             'remove_brochure' => 'nullable|boolean',
         ]);
+
+        // I Have me main image zaroori: pehle se image nahi hai (jaise I Want se I Have kiya) to nayi bhejni padegi
+        if ($request->listing_type === 'have' && ! $request->hasFile('main_image') && empty($product->main_image)) {
+            return $this->fail('Please check the highlighted fields and try again.', 422, [
+                'main_image' => ['Main image is required for I Have listing.'],
+            ]);
+        }
 
         try {
             $product->title        = trim($request->title);
             $product->product_tags = $request->product_tags;
             $product->category     = $request->category;
+            // Purana app version field nahi bhejta: tab website se set ki gayi sub category mat mitao.
+            // Par category badli ho aur purani sub category nayi category ki nahi hai, to hata do.
+            if ($request->has('sub_category_id')) {
+                $product->sub_category_id = $request->filled('sub_category_id') ? (int) $request->sub_category_id : null;
+            } elseif ($product->sub_category_id && $product->isDirty('category')) {
+                $product->sub_category_id = null;
+            }
             $product->listing_type = $request->listing_type;
             $product->description  = $request->description;
 

@@ -69,7 +69,7 @@ class ProductController extends ApiController
     /** GET /products/{slug}  (slug na ho to id se bhi khulta hai) */
     public function show(Request $request, string $slug)
     {
-        $product = self::findPublic($slug, ['member.states', 'member.citys', 'member.profile', 'categorys']);
+        $product = self::findPublic($slug, ['member.states', 'member.citys', 'member.profile', 'categorys', 'subCategory']);
 
         if (! $product) {
             return $this->fail('This listing is no longer available.', 404);
@@ -83,6 +83,13 @@ class ProductController extends ApiController
             [ApiData::url($product->main_image)],
             ApiData::urls($product->sub_images)
         ))));
+
+        // People Want product me koi image nahi: category ki image (website jaisa)
+        $imageIsCategory = false;
+        if (! $images && $type === 'want' && ($fallback = Market::productImage($product))) {
+            $images = [$fallback];
+            $imageIsCategory = true;
+        }
 
         $tags = array_values(array_filter(array_map('trim', explode(',', (string) $product->product_tags))));
 
@@ -124,7 +131,9 @@ class ProductController extends ApiController
             'type'        => $type,
             'sku'         => $product->sku,
             'images'      => $images,
+            'image_is_category' => $imageIsCategory,
             'category'    => ApiData::category($product->categorys),
+            'sub_category' => ApiData::subCategory($product->subCategory),
             'tags'        => $tags,
             'description' => ApiData::plainText($product->description),
             'attributes'  => $attributes,

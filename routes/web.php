@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\PopupController;
 use App\Http\Controllers\Admin\ProductAdminController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SurveyAdminController;
 use App\Http\Controllers\Admin\SurveyQuestionAdminController;
 use App\Http\Controllers\Front\BlogController;
@@ -132,6 +133,15 @@ Route::prefix('admin')->group(function () {
             Route::post('/store', [CategoryController::class, 'store'])->name('store');
             Route::post('/update', [CategoryController::class, 'update'])->name('update');
             Route::delete('/category-delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
+        });
+
+        // Sub Category Master (Categories Master permission hi use hota hai)
+        Route::middleware(['permission:Categories Master'])->prefix('sub-category')->name('sub-category.')->group(function () {
+            Route::get('/', [SubCategoryController::class, 'index'])->name('index');
+            Route::get('/table', [SubCategoryController::class, 'table'])->name('table');
+            Route::post('/store', [SubCategoryController::class, 'store'])->name('store');
+            Route::post('/update', [SubCategoryController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [SubCategoryController::class, 'destroy'])->name('delete');
         });
 
         Route::middleware(['permission:Banner Master'])->prefix('banner')->name('banner.')->group(function () {

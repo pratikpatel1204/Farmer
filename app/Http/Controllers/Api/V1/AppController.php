@@ -41,14 +41,32 @@ class AppController extends ApiController
     {
         $members = fn (string $role) => DB::table('users')->where('role', $role)->where('status', 1)->whereNull('deleted_at')->count();
 
+        // Content config/about_page.php se, ":brand" ki jagah app ka naam (RGM Mart)
+        $brand = (string) config('app.name');
+        $content = $this->replaceBrand(config('about_page', []), $brand);
+
         return $this->ok([
+            // stats purane app version ke liye waise hi
             'stats' => [
                 'farmers'    => $members('Farmer'),
                 'buyers'     => $members('Non Farmer'),
                 'products'   => Market::productQuery()->count(),
                 'categories' => Market::tableCategories()->count(),
             ],
-        ]);
+            'brand' => $brand,
+        ] + $content);
+    }
+
+    /** Array ke har string me ":brand" → app ka naam */
+    private function replaceBrand(array $data, string $brand): array
+    {
+        array_walk_recursive($data, function (&$value) use ($brand) {
+            if (is_string($value)) {
+                $value = str_replace(':brand', $brand, $value);
+            }
+        });
+
+        return $data;
     }
 
     /** GET /contact */

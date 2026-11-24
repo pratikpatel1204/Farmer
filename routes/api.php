@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\V1\Member\ProductController as MemberProductControl
 use App\Http\Controllers\Api\V1\Member\ProfileController as MemberProfileController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProfileController;
+use App\Http\Controllers\Api\V1\SubCategoryController;
 use App\Http\Controllers\Api\V1\SurveyController;
 use App\Http\Controllers\Api\PolicyController;
 use App\Http\Middleware\ApiActiveMember;
@@ -38,6 +39,7 @@ Route::prefix('v1')->name('api.v1.')->middleware([ApiForceJson::class])->group(f
 
         Route::get('categories', [CategoryController::class, 'index'])->name('categories');
         Route::get('categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+        Route::get('sub-categories', [SubCategoryController::class, 'index'])->name('sub-categories');
 
         Route::get('products', [ProductController::class, 'index'])->name('products');
         Route::get('products/{slug}', [ProductController::class, 'show'])->name('products.show');

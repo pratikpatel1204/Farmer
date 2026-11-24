@@ -93,6 +93,7 @@
                                 <ul>
                                     @can('Categories Master')
                                         <li><a href="{{ route('admin.category.index') }}">Categories Master</a></li>
+                                        <li><a href="{{ route('admin.sub-category.index') }}">Sub Category Master</a></li>
                                     @endcan
                                     @can('Banner Master')
                                         <li><a href="{{ route('admin.banner.index') }}">Banner Master</a></li>

@@ -1,5 +1,5 @@
 {{-- resources/views/front/products/index.blade.php
-     I Want ($type = 'want'), I Have ($type = 'have') aur Search ($type = null) teeno isi view se.
+     People Want ($type = 'want'), People Have ($type = 'have') aur Search ($type = null) teeno isi view se.
      Variables: $products (paginator), $type, $profiles (sirf search page), $categories (categories table + products_count),
                 $activeCategory (chuni hui category ya null), $totalCount --}}
 @extends('front.layout.app')
@@ -8,24 +8,24 @@
     $pages = [
         'want' => [
             'url' => url('i-want'),
-            'title' => 'I Want: what buyers need',
-            'text' => 'Fresh requirements posted by buyers, traders and shops. If you have it, contact them directly.',
-            'badge' => ['icon' => 'fa-cart-shopping', 'label' => 'I Want'],
+            'title' => 'People Want: Buyers Requirements',
+            'text' => 'Explore buyers’ requirements and send an enquiry if you can fulfil them.',
+            'badge' => ['icon' => 'fa-cart-shopping', 'label' => 'People Want'],
             'art' => 'fa-basket-shopping',
-            'crumb' => 'I Want',
+            'crumb' => 'People Want',
         ],
         'have' => [
             'url' => url('i-have'),
-            'title' => 'I Have: ready stock from farmers',
-            'text' => 'Crops, seeds and more listed by farmers. Pick what you like and talk to the farmer.',
-            'badge' => ['icon' => 'fa-seedling', 'label' => 'I Have'],
+            'title' => 'People Have: Available products and services',
+            'text' => 'Explore a wide range of products, materials, and services across categories and connect directly with suppliers.',
+            'badge' => ['icon' => 'fa-seedling', 'label' => 'People Have'],
             'art' => 'fa-wheat-awn',
-            'crumb' => 'I Have',
+            'crumb' => 'People Have',
         ],
         'search' => [
             'url' => url('search'),
             'title' => request('q') ? 'Results for "' . \Illuminate\Support\Str::limit(request('q'), 40) . '"' : 'Search products',
-            'text' => 'Results from I Have and I Want listings, plus matching member profiles.',
+            'text' => 'Results from People Have and People Want listings, plus matching member profiles.',
             'badge' => ['icon' => 'fa-magnifying-glass', 'label' => 'Search'],
             'art' => 'fa-magnifying-glass',
             'crumb' => 'Search',
@@ -104,12 +104,12 @@
                             @if ($type === 'want')
                                 <a href="{{ url('i-have') }}" class="switch-box switch-have">
                                     <strong><i class="fa-solid fa-seedling me-1"></i>Looking to buy?</strong>
-                                    <span>See ready stock in I Have <i class="fa-solid fa-arrow-right ms-1"></i></span>
+                                    <span>See ready stock in People Have <i class="fa-solid fa-arrow-right ms-1"></i></span>
                                 </a>
                             @elseif ($type === 'have')
                                 <a href="{{ url('i-want') }}" class="switch-box switch-want">
                                     <strong><i class="fa-solid fa-cart-shopping me-1"></i>Want to sell?</strong>
-                                    <span>See what buyers need in I Want <i class="fa-solid fa-arrow-right ms-1"></i></span>
+                                    <span>See what buyers need in People Want <i class="fa-solid fa-arrow-right ms-1"></i></span>
                                 </a>
                             @endif
                         </div>

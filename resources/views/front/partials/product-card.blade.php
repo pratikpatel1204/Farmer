@@ -8,11 +8,13 @@
     $state = data_get($product, 'member.states.name');
     $location = collect([$city, $state])->filter()->implode(', ') ?: (data_get($product, 'member.area') ?? data_get($product, 'owner_area'));
     $productUrl = url('product/' . $product->slug);
+    // Main image, warna People Want me category ki image
+    $thumbImage = \App\Support\Market::productImage($product);
 @endphp
 <div class="product-card card-{{ $type }}">
-    <a href="{{ $productUrl }}" class="product-thumb {{ $product->main_image ? '' : $tint }}">
-        @if ($product->main_image)
-            <img src="{{ asset($product->main_image) }}" alt="{{ $product->title }}" loading="lazy">
+    <a href="{{ $productUrl }}" class="product-thumb {{ $thumbImage ? '' : $tint }}">
+        @if ($thumbImage)
+            <img src="{{ $thumbImage }}" alt="{{ $product->title }}" loading="lazy">
         @else
             <i class="fa-solid {{ $icon }} thumb-icon" aria-hidden="true"></i>
         @endif
@@ -46,7 +48,7 @@
         </ul>
         <a href="{{ $productUrl }}" class="btn btn-product">
             @if ($type === 'want')
-                <i class="fa-solid fa-hand-holding-heart me-1"></i>I Want
+                <i class="fa-solid fa-hand-holding-heart me-1"></i>People Want
             @else
                 <i class="fa-solid fa-phone me-1"></i>Contact seller
             @endif

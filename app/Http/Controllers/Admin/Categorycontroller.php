@@ -18,6 +18,7 @@ class CategoryController extends Controller
     public function table(Request $request)
     {
         $categories = Category::query()
+            ->withCount('subCategories')
             ->when($request->search, function ($q, $search) {
                 $q->where('name', 'like', '%' . $search . '%');
             })

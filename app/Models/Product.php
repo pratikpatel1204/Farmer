@@ -22,6 +22,7 @@ class Product extends Model
         'main_image',
         'sub_images',
         'category',
+        'sub_category_id',
         'listing_type',
         'description',
         'brochure',
@@ -133,6 +134,12 @@ class Product extends Model
     public function categorys()
     {
         return $this->belongsTo(Category::class, 'category');
+    }
+
+    // Sub Category (optional)
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
     // Product Attributes
