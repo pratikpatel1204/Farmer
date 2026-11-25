@@ -287,7 +287,8 @@
                 $btn.prop('disabled', true);
                 $.ajax({
                     url: "{{ url('admin/sub-category/delete') }}/" + id,
-                    type: "DELETE",
+                    type: "POST",
+                    data: { _method: "DELETE" },
                     success: function(res) {
                         if (res.success) {
                             toastr.success(res.message);
