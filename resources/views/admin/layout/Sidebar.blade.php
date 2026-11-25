@@ -77,6 +77,8 @@
                 @canany([
                     'Categories Master',
                     'Banner Master',
+                    'Popup Master',
+                    'Notification Master',
                     'State Master',
                     'City Master',
                     'Privacy Policy',
@@ -100,6 +102,9 @@
                                     @endcan
                                     @can('Popup Master')
                                         <li><a href="{{ route('admin.popup.index') }}">Popup Master</a></li>
+                                    @endcan
+                                    @can('Notification Master')
+                                        <li><a href="{{ route('admin.notification-master.index') }}">Notification Master</a></li>
                                     @endcan
                                     @can('Level Master')
                                         <li><a href="{{ route('admin.level.index') }}">Level Master</a></li>

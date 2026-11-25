@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotificationMaster;
 use App\Support\Notify;
 use Illuminate\Http\Request;
 
@@ -99,7 +100,10 @@ class NotificationController extends Controller
             'total'  => $user->notifications()->count(),
         ];
 
-        return view('member.notifications.index', compact('notifications', 'stats', 'tab'));
+        // Admin ke Notification Master wale (sab members ke liye): default/pinned sabse upar
+        $announcements = NotificationMaster::forMembers()->get();
+
+        return view('member.notifications.index', compact('notifications', 'stats', 'tab', 'announcements'));
     }
 
     /** Admin panel: sab notifications ki list. */

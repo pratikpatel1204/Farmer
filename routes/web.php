@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\MemberDetailsController;
 use App\Http\Controllers\Admin\MemberTreeController;
+use App\Http\Controllers\Admin\NotificationMasterController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\PopupController;
@@ -158,6 +159,17 @@ Route::prefix('admin')->group(function () {
             Route::post('/store', [PopupController::class, 'store'])->name('store');
             Route::post('/update', [PopupController::class, 'update'])->name('update');
             Route::delete('/popup-delete/{id}', [PopupController::class, 'destroy'])->name('delete');
+        });
+
+        // Notification Master: sab members ke liye notification (CKEditor + Default + Active/Inactive)
+        Route::middleware(['permission:Notification Master'])->prefix('notification-master')->name('notification-master.')->group(function () {
+            Route::get('/', [NotificationMasterController::class, 'index'])->name('index');
+            Route::get('/table', [NotificationMasterController::class, 'table'])->name('table');
+            Route::post('/store', [NotificationMasterController::class, 'store'])->name('store');
+            Route::post('/update', [NotificationMasterController::class, 'update'])->name('update');
+            Route::post('/{notification}/default', [NotificationMasterController::class, 'toggleDefault'])->name('default');
+            Route::post('/{notification}/status', [NotificationMasterController::class, 'toggleStatus'])->name('status');
+            Route::delete('/{notification}', [NotificationMasterController::class, 'destroy'])->name('delete');
         });
 
         Route::middleware(['permission:Level Master'])->prefix('level')->name('level.')->group(function () {

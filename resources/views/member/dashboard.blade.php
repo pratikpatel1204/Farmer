@@ -103,6 +103,21 @@
 @endphp
 @section('content')
     <main class="zentic-content">
+        @if ($pinnedNotification)
+            <div class="km-ann km-ann-pinned km-ann-dash">
+                <button class="km-ann-head" type="button" data-bs-toggle="collapse" data-bs-target="#annDash"
+                    aria-expanded="true">
+                    <span class="km-ann-title">
+                        <span class="km-ann-badge">Pinned</span>{{ $pinnedNotification->title }}
+                    </span>
+                    <span class="km-ann-date">{{ $pinnedNotification->created_at->format('d M Y') }}</span>
+                </button>
+                <div id="annDash" class="collapse show">
+                    <div class="km-ann-body">{!! $pinnedNotification->description !!}</div>
+                </div>
+            </div>
+        @endif
+
         <div class="ai-insight-banner mb-4">
             <div class="ai-banner-icon"><i class="icon-circle-user"></i></div>
             <div class="ai-banner-content">

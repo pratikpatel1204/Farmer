@@ -40,3 +40,27 @@ a.notif-item:hover { color: inherit; }
 }
 .km-notif-stats span { font-size: 12px; color: #6b7a70; }
 .km-notif-stats strong { font-size: 20px; color: #1b2a1f; }
+
+/* ---- Admin announcements (Notification Master) ---- */
+.km-ann-list { display: flex; flex-direction: column; gap: 10px; }
+.km-ann { border: 1px solid rgba(29, 122, 58, .14); border-radius: 10px; overflow: hidden; background: #fff; }
+.km-ann-pinned { border-color: #e0a800; background: #fffaf0; }
+.km-ann-head {
+    width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 12px 14px; border: 0; background: transparent; text-align: left; cursor: pointer;
+}
+.km-ann-title { font-weight: 600; color: #1b2a1f; }
+.km-ann-date { font-size: 12px; color: #8a958d; white-space: nowrap; }
+.km-ann-badge {
+    display: inline-block; margin-right: 6px; padding: 1px 8px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; background: #e0a800; color: #fff; vertical-align: middle;
+}
+.km-ann-body { padding: 0 14px 12px; color: #3d4a41; font-size: 14px; overflow-wrap: anywhere; }
+.km-ann-body p:last-child { margin-bottom: 0; }
+.km-ann-body table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+.km-ann-body td, .km-ann-body th { border: 1px solid #dfe5e0; padding: 6px 8px; }
+.km-ann-body blockquote { border-left: 3px solid #1d7a3a; padding-left: 10px; color: #5b6a60; }
+.km-ann-body figure { margin: 0; overflow-x: auto; }
+
+/* Dashboard par pinned announcement */
+.km-ann-dash { margin-bottom: 1.5rem; }

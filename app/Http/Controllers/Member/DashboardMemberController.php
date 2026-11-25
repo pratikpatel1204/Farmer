@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\NotificationMaster;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,10 @@ class DashboardMemberController extends Controller
         $inquiryStats = $this->inquiryStats($user->id);
         $teamStats    = $this->teamStats($user->unique_id);
 
-        return view('member.dashboard', compact('user', 'profile', 'productStats', 'inquiryStats', 'teamStats'));
+        // Admin ka default (pinned) notification dashboard ke top par
+        $pinnedNotification = NotificationMaster::pinned();
+
+        return view('member.dashboard', compact('user', 'profile', 'productStats', 'inquiryStats', 'teamStats', 'pinnedNotification'));
     }
 
     /** products.listing_type 'have' / 'want' ko key me badalta hai, baaki null */

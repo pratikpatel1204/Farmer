@@ -77,6 +77,8 @@
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any([
                     'Categories Master',
                     'Banner Master',
+                    'Popup Master',
+                    'Notification Master',
                     'State Master',
                     'City Master',
                     'Privacy Policy',
@@ -100,6 +102,9 @@
                                     <?php endif; ?>
                                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('Popup Master')): ?>
                                         <li><a href="<?php echo e(route('admin.popup.index')); ?>">Popup Master</a></li>
+                                    <?php endif; ?>
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('Notification Master')): ?>
+                                        <li><a href="<?php echo e(route('admin.notification-master.index')); ?>">Notification Master</a></li>
                                     <?php endif; ?>
                                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('Level Master')): ?>
                                         <li><a href="<?php echo e(route('admin.level.index')); ?>">Level Master</a></li>

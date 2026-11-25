@@ -48,6 +48,34 @@
 
         <div class="row g-4">
             <div class="col-lg-8">
+                @if ($announcements->isNotEmpty())
+                    <div class="zentic-card mb-4">
+                        <div class="zentic-card-body">
+                            <p class="fw-semibold mb-3"><i class="icon-bell me-1"></i> Announcements</p>
+                            <div class="km-ann-list">
+                                @foreach ($announcements as $a)
+                                    <div class="km-ann {{ $a->is_default ? 'km-ann-pinned' : '' }}">
+                                        <button class="km-ann-head {{ $a->is_default ? '' : 'collapsed' }}" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#ann{{ $a->id }}"
+                                            aria-expanded="{{ $a->is_default ? 'true' : 'false' }}">
+                                            <span class="km-ann-title">
+                                                @if ($a->is_default)
+                                                    <span class="km-ann-badge">Pinned</span>
+                                                @endif
+                                                {{ $a->title }}
+                                            </span>
+                                            <span class="km-ann-date">{{ $a->created_at->format('d M Y') }}</span>
+                                        </button>
+                                        <div id="ann{{ $a->id }}" class="collapse {{ $a->is_default ? 'show' : '' }}">
+                                            <div class="km-ann-body">{!! $a->description !!}</div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="zentic-card">
                     <div class="zentic-card-body">
                         <div class="notif-tabs mb-3">
