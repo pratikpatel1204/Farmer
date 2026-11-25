@@ -330,6 +330,7 @@ Route::get('profile/{uniqueId}', [ProfileController::class, 'show'])->name('prof
 
 Route::get('category', [FrontCategoryController::class, 'index'])->name('category.index');
 Route::get('category/{slug}', [FrontCategoryController::class, 'show'])->name('category.show');
+Route::get('category/{slug}/{subSlug}', [FrontCategoryController::class, 'show'])->name('category.sub');
 
 Route::get('blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('blog/{slug}', [BlogController::class, 'show'])->name('blog.show');

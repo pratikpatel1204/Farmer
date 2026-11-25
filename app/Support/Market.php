@@ -229,6 +229,18 @@ class Market
         return $slug ?: (\Illuminate\Support\Str::slug($category->name ?? '') ?: (string) $category->getKey());
     }
 
+    /** Sub category ka URL slug (naam se), naam se slug na bane to id */
+    public static function subSlugOf($subCategory): string
+    {
+        return \Illuminate\Support\Str::slug($subCategory->name ?? '') ?: (string) $subCategory->getKey();
+    }
+
+    /** Sub category page ka URL: /category/{category-slug}/{sub-slug} */
+    public static function subCategoryUrl($category, $subCategory): string
+    {
+        return url('category/' . self::slugOf($category) . '/' . self::subSlugOf($subCategory));
+    }
+
     /** slug (ya id) se category dhundo */
     public static function findCategory(string $slug)
     {

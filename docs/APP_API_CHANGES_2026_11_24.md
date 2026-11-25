@@ -2,6 +2,7 @@
 
 > Ye file app developer ke liye hai: **backend API me kya badla (ho chuka hai)** aur **app me use kaise karna hai**.
 > Kya aur kyun badla, uski poori analysis (labels, design, checklist): `docs/APP_CHANGES_2026_11_24.md`.
+> Category → Sub Category → Products screen flow (`GET /categories/{slug}?sub_category=`): `docs/APP_CATEGORY_SUBCATEGORY_FLOW.md`.
 >
 > Base URL: `{{BASE}}/api/v1` · Header: `Accept: application/json` · Login wale APIs: `Authorization: Bearer {token}`
 > Response ka dhancha pehle jaisa hai: `{ "success": true|false, "message": "...", "data": ... , "errors": {...} }`

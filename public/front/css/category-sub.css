@@ -1,0 +1,153 @@
+/* =========================================================
+   Category page: sub category cards (category ke andar pehle sub categories)
+   Rang header.css ke --farm-* tokens se, category ke color ke hisaab se accent.
+   ========================================================= */
+
+.sub-cat-section {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--farm-line);
+}
+
+.sub-cat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-bottom: 1rem;
+}
+
+.sub-cat-title {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    color: var(--farm-green-dark);
+}
+
+.sub-cat-title i {
+    color: var(--farm-green);
+}
+
+.sub-cat-total {
+    flex-shrink: 0;
+    min-width: 2rem;
+    padding: .15rem .6rem;
+    border-radius: 999px;
+    background: var(--farm-mist);
+    color: var(--farm-green-dark);
+    font-weight: 700;
+    text-align: center;
+}
+
+.sub-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+}
+
+@media (min-width: 768px) {
+    .sub-cat-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 380px) {
+    .sub-cat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sub-cat-card {
+    --sub-accent: var(--farm-green);
+    --sub-soft: var(--farm-mist);
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    min-height: 4.5rem;
+    padding: .75rem .85rem;
+    border-radius: 1rem;
+    border: 1px solid var(--farm-line);
+    border-left: 4px solid var(--sub-accent);
+    background: var(--farm-white);
+    color: var(--farm-ink);
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.sub-cat-card:hover,
+.sub-cat-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--sub-accent);
+    box-shadow: 0 10px 22px rgba(19, 92, 42, .12);
+    color: var(--farm-ink);
+}
+
+.sub-cat-card.tint-red { --sub-accent: var(--farm-red); --sub-soft: #fde3da; }
+.sub-cat-card.tint-yellow { --sub-accent: var(--farm-yellow); --sub-soft: #fff1cc; }
+.sub-cat-card.tint-lime { --sub-accent: var(--farm-lime); --sub-soft: #eef7e0; }
+.sub-cat-card.tint-brown { --sub-accent: var(--farm-brown); --sub-soft: #f3e7dc; }
+.sub-cat-card.tint-dark-green { --sub-accent: var(--farm-green-dark); --sub-soft: var(--farm-mist); }
+
+.sub-cat-icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: .8rem;
+    background: var(--sub-soft);
+    color: var(--sub-accent);
+    font-size: 1.1rem;
+}
+
+.sub-cat-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+}
+
+.sub-cat-name {
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.sub-cat-count {
+    font-size: .85rem;
+    color: var(--farm-ink-soft);
+}
+
+.sub-cat-arrow {
+    flex-shrink: 0;
+    font-size: .8rem;
+    color: var(--sub-accent);
+    transition: transform .2s;
+}
+
+.sub-cat-card:hover .sub-cat-arrow {
+    transform: translateX(3px);
+}
+
+/* 0 listing wali sub category: halki dikhe, par click ho sake */
+.sub-cat-card.is-empty {
+    opacity: .7;
+}
+
+.empty-state.empty-state-sm {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sub-cat-card,
+    .sub-cat-arrow {
+        transition: none;
+    }
+}
